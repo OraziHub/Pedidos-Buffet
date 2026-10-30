@@ -627,6 +627,7 @@
     }
 
     /* Caja de Datos Bancarios */
+    .line {height:1px; margin:0 14px; border-top:1px dashed #fed7aa;}
     .bank-card {
       background:;
       border:;
@@ -795,7 +796,34 @@
           <i data-lucide="receipt" style="width: 22px; height: 22px;"></i>
           <span>Pagá al Alias CVU: <strong>conejo.estas.ahi</strong> <br/>y subí tu <strong>Comprobante de Pago</strong> adjuntandoló a tu Pedido.</span>
         </div>
-        <div class="cause-banner">
+              <!-- Datos Bancarios para Transferencia -->
+      <div class="bank-card">
+        <div class="bank-header">
+          <i data-lucide="credit-card" style="width:16px;height:16px;"></i>
+          Datos para Transferencia
+        </div>
+        <div class="bank-info-row">
+          <div class="bank-alias-wrap">
+            <span class="bank-label">Alias CVU</span>
+            <span class="bank-val-alias" id="aliasDisplay">conejo.estas.ahi</span>
+          </div>
+          <button type="button" class="btn-copy-alias" id="btnCopyAlias" onclick="copyAlias()">
+            <i data-lucide="copy" style="width:14px;height:14px;" id="copyIcon"></i>
+            <span id="copyBtnText">Copiar</span>
+          </button>
+        </div>
+        <div class="bank-info-row">
+          <span class="bank-label">Titular: </span>
+          <span class="bank-val-name">Marianela Ester Leiva</span>
+          <br/>
+          <span class="bank-label">DNI: </span>
+          <span class="bank-val-name">27-30243851-5</span>
+        </div>
+      </div>
+
+      <div class="line"></div>
+       
+        <div class="cause-banner" style="display:none;">
           <i data-lucide="smartphone" style="width: 22px; height: 22px;"></i>
           <span>Cualquier problema escribinos al 351-Teléfono del Conejo</span>
         </div>
