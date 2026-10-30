@@ -147,7 +147,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      color: #7b7873;
+      color: #9a3412;
       font-size: 0.88rem;
       font-weight: 600;
       line-height: 1.4;
@@ -189,91 +189,6 @@
       background: var(--color-card-bg);
       color: var(--color-primary);
       box-shadow: 0 2px 6px rgba(43, 31, 26, 0.08);
-    }
-
-    .brand-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      flex-shrink: 0;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: #ef4444;
-    }
-
-    .status-dot.online { background-color: #10b981; }
-    .status-dot.syncing { background-color: #f59e0b; }
-
-    /* Info Banner Germinar */
-    .cause-banner {
-      background: #fffbeb2a;
-      border: 1px solid #ecaa8863;
-      padding: 12px 14px;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #b9762e;
-      font-size: 0.88rem;
-      font-weight: 600;
-      line-height: 1.4;
-      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.08);
-    }
-
-    .cause-banner i {
-      flex-shrink: 0;
-      color: var(--color-primary);
-    }
-
-    /* Pestañas de Navegación */
-    .tabs-nav {
-      display: flex;
-      gap: 8px;
-      background: #eef2f6;
-      padding: 4px;
-      border-radius: var(--radius-md);
-    }
-
-    .tab-btn {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 14px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      border: none;
-      background: transparent;
-      color: var(--color-text-muted);
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .tab-btn.active {
-      background: var(--color-card-bg);
-      color: var(--color-primary);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
     }
 
     .tab-pane {
@@ -404,15 +319,16 @@
       overflow: hidden;
       color: var(--color-text-main);
     }
+
     .prod-desc {
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-  line-height: 1.35;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .prod-price {
@@ -673,6 +589,8 @@
       flex-direction: column;
       gap: 14px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
     .modal-title {
@@ -704,8 +622,87 @@
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
       padding: 12px;
-      max-height: 220px;
+      height: auto;
       overflow-y: auto;
+    }
+
+    /* Caja de Datos Bancarios */
+    .bank-card {
+      background:;
+      border:;
+      border-radius: var(--radius-md);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .bank-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #9a3412;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .bank-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid #fed7aa;
+      border-radius: var(--radius-sm);
+      padding: 8px 10px;
+    }
+
+    .bank-alias-wrap {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .bank-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+
+    .bank-val-alias {
+      font-family: monospace;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--color-primary);
+    }
+
+    .bank-val-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text-main);
+    }
+
+    .btn-copy-alias {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 10px;
+      background: var(--color-primary-light);
+      border: 1px solid var(--color-primary);
+      color: var(--color-primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-copy-alias:hover {
+      background: var(--color-primary);
+      color: #fff;
     }
 
     .btn-wa-action, .btn-close-modal {
@@ -736,11 +733,11 @@
     .btn-close-modal:hover { background: #e2e8f0; }
 
     .card-footer {
-  margin: 4em 0;
-  text-align: center;
-  color: gray;
-  font-size: 0.9em;
-}
+      margin: 4em 0;
+      text-align: center;
+      color: gray;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
@@ -757,7 +754,7 @@
       </div>
     </header>
 
-     <div class="tabs-nav">
+    <div class="tabs-nav">
       <button class="tab-btn active" id="tabCatalogBtn"><i data-lucide="groceries" style="width: 18px !important;"></i> MENÚ</button>
       <button class="tab-btn" id="tabOrdersBtn"><i data-lucide="clock" style="width: 18px !important;"></i> PEDIDOS</button>
     </div>
@@ -765,12 +762,12 @@
     <!-- PESTAÑA MENÚ -->
     <div class="tab-pane active" id="paneCatalog">
       <section class="card">
-           <!-- Caja de Información Benéfica -->
-    <div class="cause-banner">
-      <i data-lucide="sprout" style="width: 82px; height: 82px;"></i>
-      <span>Preventa para el Almuerzo del día <strong>Sábado 7 de Noviembre 2026</strong>. Lo recaudado se usará para costear la <strong>Turma 310</strong> del <strong>Programa de Formación Germinar</strong>.</span>
-    </div>
-        <h2 class="section-title"  style="margin: 2em 0em 1em;"><i data-lucide="cookie" style="width:18px;height:18px;"></i> Productos</h2>
+        <!-- Caja de Información Benéfica -->
+        <div class="cause-banner">
+          <i data-lucide="sprout" style="width: 62px; height: 62px;"></i>
+          <span>Preventa Almuerzo del día <strong>Sábado 7 de Noviembre 2026</strong>.<br/><i>Recibimos pedidos hasta el Miércoles 05/11/2026</i></span>
+        </div>
+        <h2 class="section-title" style="margin: 2em 0em 1em;"><i data-lucide="cookie" style="width:18px;height:18px;"></i> Productos</h2>
         <div class="categories-bar" id="categoryBar"></div>
         <div class="product-list" id="productList"></div>
       </section>
@@ -780,13 +777,13 @@
         <h2 class="section-title"><i data-lucide="user-check" style="width:18px;height:18px;"></i> Tus Datos</h2>
         
         <div class="field-group">
-          <label for="inputNombre">Nombre completo</label>
-          <input type="text" id="inputNombre" placeholder="Tu nombre y apellido" autocomplete="name" required />
+          <label for="inputNombre">Nombre Completo</label>
+          <input type="text" id="inputNombre" placeholder="Nombre y Apellido" autocomplete="name" required />
         </div>
 
         <div class="field-group">
-          <label for="inputTelefono">Teléfono de contacto</label>
-          <input type="tel" id="inputTelefono" placeholder="Ej: 11 2345 6789" autocomplete="tel" required />
+          <label for="inputTelefono">Teléfono de Contacto</label>
+          <input type="tel" id="inputTelefono" placeholder="Ej: 351 06 06 4 5 6" autocomplete="tel" required />
         </div>
       </section>
     </div>
@@ -795,21 +792,21 @@
     <div class="tab-pane" id="paneOrders">
       <section class="card">        
         <div class="cause-banner">
-      <i data-lucide="receipt" style="width: 22px; height: 22px;"></i>
-      <span>Pagá al Alias CVU: <strong>conejo.estás.ahi</strong> <br/>y subí tu <strong>Comprobante de Pago</strong> adjuntandoló a tu Pedido.</span>
-    </div>
-            <div class="cause-banner">
-      <i data-lucide="smartphone" style="width: 22px; height: 22px;"></i>
-      <span>Cualquie problema escribinos al 351-Telefono del Conejo</span>
-    </div>
-    <h2 class="section-title"  style="margin: 2em 0em 1em;"><i data-lucide="clock" style="width:18px;height:18px;"></i> Historial de Pedidos</h2>
+          <i data-lucide="receipt" style="width: 22px; height: 22px;"></i>
+          <span>Pagá al Alias CVU: <strong>conejo.estas.ahi</strong> <br/>y subí tu <strong>Comprobante de Pago</strong> adjuntandoló a tu Pedido.</span>
+        </div>
+        <div class="cause-banner">
+          <i data-lucide="smartphone" style="width: 22px; height: 22px;"></i>
+          <span>Cualquier problema escribinos al 351-Teléfono del Conejo</span>
+        </div>
+        <h2 class="section-title" style="margin: 2em 0em 1em;"><i data-lucide="clock" style="width:18px;height:18px;"></i> Historial de Pedidos</h2>
         <div id="ordersList"></div>
       </section>
     </div>
 
-   <!-- PIE DE PAGINA -->
+    <!-- PIE DE PAGINA -->
     <section class="card-footer">
-        <span>Hecho con <i data-lucide="heart" style="width:20px;height:20px;margin-bottom: -4px;stroke-width: 2.5px;"></i> por la <strong>Turma 310</strong></span>
+      <span>Hecho con <i data-lucide="heart" style="width:20px;height:20px;margin-bottom: -4px;stroke-width: 2.5px;"></i> por la <strong>Turma 310</strong></span>
     </section>
   </div>
 
@@ -829,16 +826,43 @@
   <div class="modal-overlay" id="orderModal">
     <div class="modal">
       <h3 class="modal-title"><i data-lucide="check-circle" style="width:24px;height:24px;"></i> GRACIAS! Pedido Registrado</h3>
-      
+
+    <!-- Detalle del Pedido -->
+    <div class="modal-detail-box" id="modalDetail"></div>
+
       <!-- Mensaje recordatorio comprobante -->
       <div class="modal-notice-box">
         <i data-lucide="info" style="width:18px;height:18px;flex-shrink:0;"></i>
         <span>Subí tu comprobante de pago por el monto del pedido, desde la pestaña <strong>PEDIDOS</strong>.</span>
       </div>
 
-      <div class="modal-detail-box" id="modalDetail"></div>
+      <!-- Datos Bancarios para Transferencia -->
+      <div class="bank-card">
+        <div class="bank-header">
+          <i data-lucide="credit-card" style="width:16px;height:16px;"></i>
+          Datos para Transferencia
+        </div>
+        <div class="bank-info-row">
+          <div class="bank-alias-wrap">
+            <span class="bank-label">Alias CVU</span>
+            <span class="bank-val-alias" id="aliasDisplay">conejo.estas.ahi</span>
+          </div>
+          <button type="button" class="btn-copy-alias" id="btnCopyAlias" onclick="copyAlias()">
+            <i data-lucide="copy" style="width:14px;height:14px;" id="copyIcon"></i>
+            <span id="copyBtnText">Copiar</span>
+          </button>
+        </div>
+        <div class="bank-info-row">
+          <span class="bank-label">Titular: </span>
+          <span class="bank-val-name">Marianela Ester Leiva</span>
+          <br/>
+          <span class="bank-label">DNI: </span>
+          <span class="bank-val-name">27-30243851-5</span>
+        </div>
+      </div>
+
       
-     <a href="#" id="btnWaLink" target="_blank" class="btn-wa-action">
+      <a href="#" id="btnWaLink" target="_blank" class="btn-wa-action" style="display:none;">
         <i data-lucide="message-circle" style="display:none;width:18px;height:18px;"></i> Enviar comprobante o consulta por WhatsApp
       </a>
 
@@ -880,7 +904,6 @@
         const json = await response.json();
 
         if (json && json.status === 'success') {
-          // El nombre de la tienda permanece fijo y no es sobreescrito desde la planilla
           state.nombreTienda = NOMBRE_TIENDA_FIJO;
           document.title = NOMBRE_TIENDA_FIJO;
           storeNameDisplay.textContent = NOMBRE_TIENDA_FIJO;
@@ -993,6 +1016,21 @@
     inputNombre.addEventListener('input', updateTotal);
     inputTelefono.addEventListener('input', updateTotal);
 
+    // Función Copiar Alias
+    window.copyAlias = function() {
+      const alias = "conejo.estas.ahi";
+      navigator.clipboard.writeText(alias).then(() => {
+        const btnText = document.getElementById('copyBtnText');
+        const originalText = btnText.textContent;
+        btnText.textContent = "¡Copiado!";
+        setTimeout(() => {
+          btnText.textContent = originalText;
+        }, 2000);
+      }).catch(err => {
+        console.error('Error al copiar alias: ', err);
+      });
+    };
+
     // Registro de Pedido
     document.getElementById('btnSubmit').addEventListener('click', async () => {
       const itemsComprados = state.productos
@@ -1081,6 +1119,7 @@
 
       renderProducts();
       updateTotal();
+      if (window.lucide) lucide.createIcons();
 
       try {
         await fetch(GOOGLE_SCRIPT_URL, {
@@ -1233,7 +1272,5 @@
     if (window.lucide) lucide.createIcons();
     fetchSheetData();
   </script>
-
-
 </body>
 </html>
