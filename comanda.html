@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comanda - Buffet</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --color-primary: #b9472e;
+      --color-primary-hover: #9c3620;
+      --color-primary-light: #fbeee8;
+      --color-accent: #c48234;
+      --color-bg-page: #faf6f0;
+      --color-card-bg: #ffffff;
+      --color-text-main: #2b1f1a;
+      --color-text-muted: #786b65;
+      --color-border: #ede4dc;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-family);
+    }
+
+    body {
+      background-color: var(--color-bg-page);
+      color: var(--color-text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 24px 16px 80px 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 760px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(185, 71, 46, 0.2);
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: var(--color-text-main);
+    }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+    }
+
+    .btn-refresh {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      color: var(--color-text-main);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-refresh:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+    }
+
+    .metric-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .metric-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .metric-val {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--color-primary);
+    }
+
+    /* Barra de filtros y orden */
+    .controls-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .search-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .search-card input {
+      border: none;
+      outline: none;
+      width: 100%;
+      background: transparent;
+      font-size: 0.92rem;
+      color: var(--color-text-main);
+    }
+
+    .sort-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      flex-shrink: 0;
+    }
+
+    .sort-card label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .sort-card select {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-text-main);
+      cursor: pointer;
+    }
+
+    .products-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .summary-item-card {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: border-color 0.2s ease;
+    }
+
+    .summary-item-card:hover {
+      border-color: #d8c7b8;
+    }
+
+    .summary-item-header {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .item-main-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .item-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-text-main);
+    }
+
+    .item-unit-price {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-weight: 600;
+    }
+
+    .item-stats-badges {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .badge-qty {
+      background: #fdf5ea;
+      border: 1px solid #fae1c3;
+      color: #92400e;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-total-income {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      text-align: right;
+      min-width: 90px;
+    }
+
+    .chevron-icon {
+      transition: transform 0.2s ease;
+      color: var(--color-text-muted);
+    }
+
+    .summary-item-card.open .chevron-icon {
+      transform: rotate(180deg);
+    }
+
+    .breakdown-table-wrap {
+      display: none;
+      padding: 0 16px 14px 16px;
+      border-top: 1px dashed var(--color-border);
+      background: #fcfaf8;
+    }
+
+    .summary-item-card.open .breakdown-table-wrap {
+      display: block;
+    }
+
+    .breakdown-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-text-muted);
+      padding: 10px 0 6px 0;
+    }
+
+    .breakdown-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .breakdown-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background: #ffffff;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      gap: 8px;
+    }
+
+    .order-tag {
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 0.82rem;
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      padding: 2px 6px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .buyer-info {
+      flex: 1;
+      font-weight: 600;
+      color: var(--color-text-main);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .buyer-phone {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      font-weight: normal;
+      margin-left: 6px;
+    }
+
+    .order-qty-pill {
+      font-weight: 800;
+      color: var(--color-primary-hover);
+      flex-shrink: 0;
+      background: #f3ece6;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
+
+    /* SECCIÓN DE PEDIDOS MANUALES / S/N */
+    .manual-orders-section {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .manual-orders-card {
+      background: #fffbf5;
+      border: 1px solid #fbd38d;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(196, 130, 52, 0.08);
+    }
+
+    .manual-header {
+      padding: 14px 16px;
+      background: #fef3c7;
+      border-bottom: 1px solid #fde68a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .manual-header-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .manual-badge {
+      background: #b45309;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    .manual-body {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .manual-item-row {
+      background: #ffffff;
+      border: 1px solid #fed7aa;
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .manual-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+
+    .manual-sn-tag {
+      background: #fef3c7;
+      color: #92400e;
+      font-family: monospace;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #fde68a;
+      font-size: 0.78rem;
+    }
+
+    .manual-resumen {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      background: #faf6f0;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .loading-state {
+      text-align: center;
+      padding: 40px 16px;
+      color: var(--color-text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo-badge">
+          <i data-lucide="clipboard-list" style="width:22px;height:22px;"></i>
+        </div>
+        <div>
+          <h1 class="brand-title">Comanda - Buffet</h1>
+          <div class="brand-sub">Preventa Sábado 07/11</div>
+        </div>
+      </div>
+      
+      <button class="btn-refresh" id="btnRefresh" onclick="fetchData()">
+        <i data-lucide="rotate-cw" style="width:14px;height:14px;" id="refreshIcon"></i>
+        Actualizar
+      </button>
+    </header>
+
+    <!-- Tarjetas de Métricas -->
+    <section class="metrics-grid">
+      <div class="metric-card">
+        <span class="metric-label"><i data-lucide="shopping-bag" style="width:14px;height:14px;"></i>Productos Vendidos:</span>
+        <span class="metric-val" id="totalItemsCount">0</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label"><i data-lucide="circle-dollar-sign" style="width:14px;height:14px;"></i> Ingresos <small>(en bruto)</small>:</span>
+        <span class="metric-val" id="totalIncome">$ 0</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label"><i data-lucide="utensils" style="width:14px;height:14px;"></i> Platos Diferentes</span>
+        <span class="metric-val" id="totalVarieties">0</span>
+      </div>
+    </section>
+
+    <!-- Barra de Controles: Buscador y Ordenador -->
+    <div class="controls-bar">
+      <div class="search-card">
+        <i data-lucide="search" style="width:18px;height:18px;color:var(--color-text-muted);"></i>
+        <input type="text" id="searchInput" placeholder="Filtrar por comida, bebida, comprador o pedido..." oninput="applyFiltersAndSort()">
+      </div>
+
+      <div class="sort-card">
+        <label for="sortSelect">
+          <i data-lucide="arrow-up-down" style="width:14px;height:14px;"></i> Orden:
+        </label>
+        <select id="sortSelect" onchange="applyFiltersAndSort()">
+          <option value="qty-desc">Más pedidos</option>
+          <option value="alpha-asc">Nombre (A - Z)</option>
+          <option value="alpha-desc">Nombre (Z - A)</option>
+          <option value="money-desc">Mayor recaudación</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Lista consolidada de Productos -->
+    <div class="products-list" id="productsContainer">
+      <div class="loading-state">
+        <i data-lucide="loader" style="width:28px;height:28px;animation:spin 1.5s linear infinite;"></i>
+        <span>Conectando con la planilla de Google...</span>
+      </div>
+    </div>
+
+    <!-- Sección de Pedidos Manuales / S.N -->
+    <div class="manual-orders-section" id="manualSection" style="display: none;">
+      <div class="manual-orders-card">
+        <div class="manual-header">
+          <div class="manual-header-title">
+            <i data-lucide="alert-triangle" style="width:18px;height:18px;color:#b45309;"></i>
+            Pedidos Manuales o Sin Número (S/N)
+          </div>
+          <span class="manual-badge" id="manualCountBadge">0</span>
+        </div>
+        <div class="manual-body" id="manualContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFjVAPSu3Ij9VDmsTe0BpTIlfOfjRNnkUaCfosPMr9YaS9z-iAgXGFRKIBf3YrRx0NTQ/exec";
+
+    let aggregatedProducts = [];
+    let manualOrdersList = [];
+
+    function normalizeStr(str) {
+      return String(str || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+    }
+
+    async function fetchData() {
+      const btn = document.getElementById('btnRefresh');
+      const icon = document.getElementById('refreshIcon');
+      btn.disabled = true;
+      if (icon) icon.style.animation = 'spin 1s linear infinite';
+
+      const container = document.getElementById('productsContainer');
+      container.innerHTML = `
+        <div class="loading-state">
+          <i data-lucide="loader" style="width:28px;height:28px;animation:spin 1.5s linear infinite;"></i>
+          <span>Cargando y consolidando pedidos...</span>
+        </div>`;
+      if (window.lucide) lucide.createIcons();
+
+      try {
+        const response = await fetch(GOOGLE_SCRIPT_URL);
+        const data = await response.json();
+
+        if (data && data.status === "success") {
+          processOrders(data.pedidos || [], data.productos || []);
+        } else {
+          showError("La planilla respondió pero no se pudo leer el listado.");
+        }
+      } catch (err) {
+        console.error(err);
+        showError("Error de conexión: No se pudieron obtener los datos de la planilla.");
+      } finally {
+        btn.disabled = false;
+        if (icon) icon.style.animation = 'none';
+      }
+    }
+
+    function processOrders(pedidos, productos) {
+      const catalog = {};
+      productos.forEach(p => {
+        if (!p || !p.nombre) return;
+        catalog[normalizeStr(p.nombre)] = {
+          nombreOficial: p.nombre.trim(),
+          precio: Number(p.precio) || 0
+        };
+      });
+
+      const fallbackPrices = {
+        "pizza muzza - 8 unid": 12000,
+        "pizza roquefort - 8 unid": 12000
+      };
+
+      const productTotals = {};
+      manualOrdersList = [];
+
+      pedidos.forEach((pedido, idx) => {
+        const rawOrderId = String(pedido.orderId || "").trim();
+        const resumen = String(pedido.resumen || "").trim();
+        const comprador = String(pedido.comprador || "Anónimo").trim();
+        const telefono = String(pedido.telefono || "").trim();
+        const total = Number(pedido.total) || 0;
+        const fecha = String(pedido.fecha || "").trim();
+
+        const isManual = !rawOrderId || rawOrderId.toUpperCase() === "S/N" || rawOrderId === "null" || rawOrderId === "undefined" || !rawOrderId.toUpperCase().startsWith("PED-");
+
+        if (isManual && resumen) {
+          manualOrdersList.push({
+            id: `MAN-${idx + 1}`,
+            orderId: rawOrderId || "S/N",
+            comprador: comprador,
+            telefono: telefono,
+            total: total,
+            fecha: fecha,
+            resumen: resumen
+          });
+        }
+
+        if (!resumen) return;
+
+        const items = resumen.split(/,\s*(?=\d+\s*x)/i);
+
+        items.forEach(rawItem => {
+          const match = rawItem.match(/^(\d+)\s*x\s*(.+)$/i);
+          if (match) {
+            const cantidad = parseInt(match[1], 10) || 1;
+            const rawNombre = match[2].trim();
+            const cleanKey = normalizeStr(rawNombre);
+
+            let unitPrice = 0;
+            let displayName = rawNombre;
+
+            if (catalog[cleanKey]) {
+              unitPrice = catalog[cleanKey].precio;
+              displayName = catalog[cleanKey].nombreOficial;
+            } else if (fallbackPrices[cleanKey]) {
+              unitPrice = fallbackPrices[cleanKey];
+            }
+
+            if (!productTotals[cleanKey]) {
+              productTotals[cleanKey] = {
+                key: cleanKey,
+                nombre: displayName,
+                precioUnitario: unitPrice,
+                totalCantidad: 0,
+                totalIngreso: 0,
+                pedidosDetalle: []
+              };
+            }
+
+            productTotals[cleanKey].totalCantidad += cantidad;
+            productTotals[cleanKey].totalIngreso += (cantidad * unitPrice);
+
+            productTotals[cleanKey].pedidosDetalle.push({
+              orderId: rawOrderId || "S/N",
+              isManual: isManual,
+              comprador: comprador,
+              telefono: telefono,
+              cantidad: cantidad,
+              subtotal: cantidad * unitPrice
+            });
+          }
+        });
+      });
+
+      aggregatedProducts = Object.values(productTotals);
+
+      renderMetrics();
+      applyFiltersAndSort();
+    }
+
+    function renderMetrics() {
+      const totalItems = aggregatedProducts.reduce((sum, p) => sum + p.totalCantidad, 0);
+      const totalMoney = aggregatedProducts.reduce((sum, p) => sum + p.totalIngreso, 0);
+
+      document.getElementById('totalItemsCount').textContent = totalItems.toLocaleString('es-AR');
+      document.getElementById('totalIncome').textContent = `$ ${totalMoney.toLocaleString('es-AR')}`;
+      document.getElementById('totalVarieties').textContent = aggregatedProducts.length;
+    }
+
+    function renderList(list) {
+      const container = document.getElementById('productsContainer');
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="loading-state">
+            <i data-lucide="package-open" style="width:32px;height:32px;"></i>
+            <span>No hay platos que coincidan con la búsqueda.</span>
+          </div>`;
+        if (window.lucide) lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = list.map((item, idx) => {
+        const rowsHtml = item.pedidosDetalle.map(det => `
+          <div class="breakdown-row">
+            <span class="order-tag" style="${det.isManual ? 'background:#fef3c7; color:#92400e;' : ''}">
+              ${det.orderId}
+            </span>
+            <div class="buyer-info">
+              ${det.comprador}
+              ${det.telefono ? `<span class="buyer-phone">(${det.telefono})</span>` : ''}
+            </div>
+            <span class="order-qty-pill">${det.cantidad} un.</span>
+          </div>
+        `).join('');
+
+        return `
+          <div class="summary-item-card" id="card-${idx}">
+            <div class="summary-item-header" onclick="toggleCard(${idx})">
+              <div class="item-main-info">
+                <div class="item-name">${item.nombre}</div>
+                <div class="item-unit-price">${item.precioUnitario ? `$ ${item.precioUnitario.toLocaleString('es-AR')} c/u` : 'Precio variable'}</div>
+              </div>
+
+              <div class="item-stats-badges">
+                <div class="badge-qty">
+                  <i data-lucide="layers" style="width:14px;height:14px;"></i>
+                  ${item.totalCantidad} un.
+                </div>
+                <div class="badge-total-income">
+                  $ ${item.totalIngreso.toLocaleString('es-AR')}
+                </div>
+                <i data-lucide="chevron-down" class="chevron-icon" style="width:18px;height:18px;"></i>
+              </div>
+            </div>
+
+            <div class="breakdown-table-wrap">
+              <div class="breakdown-title">Pedidos que lo componen (${item.pedidosDetalle.length}):</div>
+              <div class="breakdown-list">
+                ${rowsHtml}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function renderManualOrders(list) {
+      const section = document.getElementById('manualSection');
+      const container = document.getElementById('manualContainer');
+      const badge = document.getElementById('manualCountBadge');
+
+      if (!list || list.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+
+      section.style.display = 'flex';
+      badge.textContent = `${list.length} pedido${list.length > 1 ? 's' : ''}`;
+
+      container.innerHTML = list.map(item => `
+        <div class="manual-item-row">
+          <div class="manual-item-top">
+            <div>
+              <span class="manual-sn-tag">${item.orderId}</span>
+              <strong style="margin-left: 6px;">${item.comprador}</strong>
+              ${item.telefono ? `<span style="font-size:0.75rem; color:var(--color-text-muted);"> (${item.telefono})</span>` : ''}
+            </div>
+            <div style="font-weight: 800; color: var(--color-primary);">
+              $ ${item.total.toLocaleString('es-AR')}
+            </div>
+          </div>
+          <div class="manual-resumen">
+            ${item.resumen}
+          </div>
+        </div>
+      `).join('');
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    window.toggleCard = function(idx) {
+      const card = document.getElementById(`card-${idx}`);
+      if (card) {
+        card.classList.toggle('open');
+      }
+    };
+
+    window.applyFiltersAndSort = function() {
+      const q = normalizeStr(document.getElementById('searchInput').value);
+      const sortType = document.getElementById('sortSelect').value;
+
+      // 1. Filtrado
+      let filtered = aggregatedProducts.filter(item => {
+        if (!q) return true;
+        const matchesProduct = normalizeStr(item.nombre).includes(q);
+        const matchesBuyer = item.pedidosDetalle.some(d => 
+          normalizeStr(d.comprador).includes(q) || 
+          normalizeStr(d.orderId).includes(q) ||
+          normalizeStr(d.telefono).includes(q)
+        );
+        return matchesProduct || matchesBuyer;
+      });
+
+      // 2. Ordenamiento
+      filtered.sort((a, b) => {
+        switch (sortType) {
+          case 'alpha-asc':
+            return a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' });
+          case 'alpha-desc':
+            return b.nombre.localeCompare(a.nombre, 'es', { sensitivity: 'base' });
+          case 'money-desc':
+            return b.totalIngreso - a.totalIngreso;
+          case 'qty-desc':
+          default:
+            return b.totalCantidad - a.totalCantidad;
+        }
+      });
+
+      // Filtrado para pedidos manuales
+      const filteredManuals = manualOrdersList.filter(item => {
+        if (!q) return true;
+        return normalizeStr(item.comprador).includes(q) ||
+               normalizeStr(item.orderId).includes(q) ||
+               normalizeStr(item.telefono).includes(q) ||
+               normalizeStr(item.resumen).includes(q);
+      });
+
+      renderList(filtered);
+      renderManualOrders(filteredManuals);
+    };
+
+    function showError(msg) {
+      const container = document.getElementById('productsContainer');
+      container.innerHTML = `
+        <div class="loading-state" style="color:#b91c1c;">
+          <i data-lucide="alert-circle" style="width:32px;height:32px;"></i>
+          <span>${msg}</span>
+        </div>`;
+      if (window.lucide) lucide.createIcons();
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>
